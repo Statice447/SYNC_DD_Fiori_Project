@@ -16,8 +16,7 @@
     xmlns:viz="sap.viz.ui5.controls"
     xmlns:fr="sap.ui.core.Fragment"
     xmlns:ux="sap.uxap">
-
-    <Page id="page" title="생산 현황">
+     <Page id="page" title="생산 현황 관리" class="title">
         <!-- 뷰에서 프래그먼트 선언 -->
         <!-- 아이콘 탭바 위치-->
 
@@ -68,7 +67,9 @@
                         </layoutData>
                         <t:TreeTable
                             id="TreeTableBasic"
-                            width="12.5rem"
+                            width="12rem"
+                            minAutoRowCount="12"
+                            visibleRowCountMode="Auto"
                             rows="{
                                 path:'tree>/catalog/year',
                                 parameters: {arrayNames:['categories']}
@@ -109,11 +110,6 @@
                             rowSelectionChange="onProductSelect"
                             paste="onPaste"
                             ariaLabelledBy="title">
-                            <t:extension>
-                                <OverflowToolbar style="Clear">
-                                    <Title text="생산 현황 조회"/>
-                                </OverflowToolbar>
-                            </t:extension>
                             <t:columns>
                                 <t:Column width="15%">
                                     <Label text="생산관리번호" width="111%"/>
@@ -134,7 +130,7 @@
                                     </t:template>
                                 </t:Column>
                                 <t:Column >
-                                    <Label text="품목명" width="30%"/>
+                                    <Label text="품목명" width="25%"/>
                                     <t:template>
                                         <Text text="{main>Gdname}" wrapping="false"/>
                                     </t:template>
@@ -251,7 +247,7 @@
                                         <viz:dataset>
                                             <viz.data:FlattenedDataset data="{main>/Chart}">
                                                 <viz.data:dimensions>
-                                                    <viz.data:DimensionDefinition name="상품명" value="{main>Gdname}"/>
+                                                    <viz.data:DimensionDefinition name="품목명" value="{main>Gdname}"/>
                                                 </viz.data:dimensions>
                                                 <viz.data:measures>
                                                     <viz.data:MeasureDefinition name="생산량" value="{main>Quan}"/>
@@ -261,7 +257,7 @@
 
                                         <viz:feeds>
                                             <viz.feeds:FeedItem uid="size" type="Measure" values="생산량"/>
-                                            <viz.feeds:FeedItem uid="color" type="Dimension" values="상품명"/>
+                                            <viz.feeds:FeedItem uid="color" type="Dimension" values="품목명"/>
                                         </viz:feeds>
                                     </viz:VizFrame>
                                 </l:Grid >
@@ -272,56 +268,5 @@
                 </l:Grid>
             </content>
         </IconTabBar>
-
-        <!-- <core:Fragment fragmentName="ddppprdmanager.view.fragment.popover"
-        type="XML"/> -->
     </Page>
-    <!-- <ux:ObjectPageLayout
-        id="ObjectPageLayout"
-        showTitleInHeaderContent="true"
-        showEditHeaderButton="true"
-        editHeaderButtonPress="handleEditBtnPress"
-        upperCaseAnchorBar="false">
-        <ux:headerTitle>
-            <ux:ObjectPageDynamicHeaderTitle>
-
-                <ux:expandedHeading>
-                    <m:HBox>
-                        <m:Title text="Denise Smith" wrapping="true"/>
-                    </m:HBox>
-                </ux:expandedHeading>
-
-                <ux:snappedHeading>
-                    <m:FlexBox fitContainer="true" alignItems="Center">
-                        <m:Title text="Denise Smith" wrapping="true"/>
-                    </m:FlexBox>
-                </ux:snappedHeading>
-
-            </ux:ObjectPageDynamicHeaderTitle>
-        </ux:headerTitle>
-
-        <ux:headerContent>
-            <m:FlexBox wrap="Wrap"></m:FlexBox>
-        </ux:headerContent>
-
-        <ux:sections>
-            <ux:ObjectPageSection
-                titleUppercase="false"
-                id="goalsSection"
-                title="2014 Goals Plan">
-                <ux:heading>
-                    <m:MessageStrip
-                        text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
-                        type="Error"/>
-                </ux:heading>
-                <ux:subSections>
-                    <ux:ObjectPageSubSection id="goalsSectionSS1">
-                        <ux:blocks>
-                            <goals:GoalsBlock id="goalsblock"/>
-                        </ux:blocks>
-                    </ux:ObjectPageSubSection>
-                </ux:subSections>
-            </ux:ObjectPageSection>
-        </ux:sections>
-    </ux:ObjectPageLayout> -->
 </mvc:View>
