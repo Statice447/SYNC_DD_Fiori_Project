@@ -1,0 +1,327 @@
+<mvc:View
+    controllerName="ddppprdmanager.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:f="sap.f"
+    xmlns:tnt="sap.tnt"
+    xmlns:mc="sap.suite.ui.microchart"
+    xmlns:l="sap.ui.layout"
+    xmlns:u="sap.ui.unified"
+    xmlns:core="sap.ui.core"
+    xmlns:t="sap.ui.table"
+    xmlns:viz.data="sap.viz.ui5.data"
+    xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+    xmlns:viz="sap.viz.ui5.controls"
+    xmlns:fr="sap.ui.core.Fragment"
+    xmlns:ux="sap.uxap">
+
+    <Page id="page" title="생산 현황">
+        <!-- 뷰에서 프래그먼트 선언 -->
+        <!-- 아이콘 탭바 위치-->
+
+        <IconTabBar id="idIconTabBar" select=".onFilterSelect">
+            <items>
+                <IconTabFilter
+                    id="idtabTotal"
+                    showAll="true"
+                    count=""
+                    text="Products"
+                    key="All"/>
+                <IconTabSeparator/>
+                <IconTabFilter
+                    id="idtabProduction"
+                    icon="sap-icon://factory"
+                    iconColor="Tile"
+                    count=""
+                    text="생산 중"
+                    key="Production"/>
+                <IconTabFilter
+                    id="idtabWait"
+                    icon="sap-icon://commission-check"
+                    iconColor="Critical"
+                    count=""
+                    text="검수 대기"
+                    key="WaitChecking"/>
+                <IconTabFilter
+                    id="idtabComplete"
+                    icon="sap-icon://complete"
+                    iconColor="Positive"
+                    count=""
+                    text="생산 완료"
+                    key="Complete"/>
+
+            </items>
+
+            <content>
+
+                <!-- 그리드 -->
+                <l:Grid
+                    containerQuery="true"
+                    class="sapUiSmallMarginTop sapUiSmallMarginBottom">
+
+                    <!-- 트리 -->
+                    <VBox>
+                        <layoutData>
+                            <l:GridData span="XL2 L2 M12 S12"/>
+                        </layoutData>
+                        <t:TreeTable
+                            id="TreeTableBasic"
+                            width="12.5rem"
+                            rows="{
+                                path:'tree>/catalog/year',
+                                parameters: {arrayNames:['categories']}
+                            }"
+                            rowSelectionChange=".onSelectChange"
+                            selectionMode="Single"
+                            selectionBehavior="RowOnly"
+                            enableSelectAll="false"
+                            ariaLabelledBy="title">
+                            <t:extension></t:extension>
+                            <t:columns>
+                                <t:Column >
+                                    <Label text="연도"/>
+                                    <t:template>
+                                        <Text text="{tree>name}" wrapping="false"/>
+                                    </t:template>
+                                </t:Column>
+                            </t:columns>
+                        </t:TreeTable>
+
+                    </VBox>
+
+                    <!-- 데이터 출력 (테이블, 그래프)-->
+                    <VBox>
+                        <layoutData>
+                            <l:GridData span="XL10 L10 M12 S12"/>
+                        </layoutData>
+                        <t:Table
+                            id="ProductTable"
+                            rows="{
+                                path : 'main>/Prdmanage',
+                                sorter: {   path: 'Prmnum',
+                                            descending: false}
+
+                                }"
+                            visibleRowCount="12"
+                            selectionMode="None"
+                            rowSelectionChange="onProductSelect"
+                            paste="onPaste"
+                            ariaLabelledBy="title">
+                            <t:extension>
+                                <OverflowToolbar style="Clear">
+                                    <Title text="생산 현황 조회"/>
+                                </OverflowToolbar>
+                            </t:extension>
+                            <t:columns>
+                                <t:Column width="15%">
+                                    <Label text="생산관리번호" width="111%"/>
+                                    <t:template>
+                                        <Text text="{main>Prmnum}" wrapping="false"/>
+                                    </t:template>
+                                </t:Column>
+                                <t:Column hAlign="Center" width="6%">
+                                    <Label text="공장명"/>
+                                    <t:template>
+                                        <Text text="{main>Plname}" wrapping="false"/>
+                                    </t:template>
+                                </t:Column>
+                                <t:Column hAlign="Center" width="8%" filterProperty="Gdcode">
+                                    <Label text="품목코드"/>
+                                    <t:template>
+                                        <Text text="{main>Gdcode}" wrapping="false"/>
+                                    </t:template>
+                                </t:Column>
+                                <t:Column >
+                                    <Label text="품목명" width="30%"/>
+                                    <t:template>
+                                        <Text text="{main>Gdname}" wrapping="false"/>
+                                    </t:template>
+                                </t:Column>
+                                <t:Column hAlign="End" width="8%">
+                                    <Label text="생산수량"/>
+                                    <t:template>
+                                        <Text text="{main>Quan}" wrapping="false"/>
+                                    </t:template>
+                                </t:Column>
+                                <t:Column hAlign="Center" width="5%">
+                                    <Label text="단위"/>
+                                    <t:template>
+                                        <Text text="{main>Unit}" wrapping="false"/>
+                                    </t:template>
+                                </t:Column>
+                                <t:Column hAlign="Center" width="10%">
+                                    <Label text="생산시작일"/>
+                                    <t:template>
+                                        <Text
+                                            text="{
+                                            path: 'main>Ppstdat',
+                                            formatter: '.formatter.fnDateToString'}"/>
+                                    </t:template>
+                                </t:Column>
+                                <t:Column hAlign="Center" width="10%">
+                                    <Label text="생산종료일"/>
+                                    <t:template>
+                                        <Text
+                                            text="{
+                                            path: 'main>Ppeddat',
+                                            formatter: '.formatter.fnDateToString'}"/>
+                                    </t:template>
+                                </t:Column>
+                                <t:Column hAlign="Center" width="3%">
+                                    <Label text="상태"/>
+                                    <t:template>
+                                        <core:Icon
+                                            src="{
+                                                path : 'main>Status',
+                                                formatter : '.formatter.fnStatustoIcon'
+                                             }"
+                                            color="{
+                                                path : 'main>Status',
+                                                formatter : '.formatter.fnIconColor'
+                                             }"
+                                            press="onStatus"/>
+                                    </t:template>
+                                </t:Column>
+                            </t:columns>
+                        </t:Table>
+                        <HBox >
+                            <VBox >
+                                <!-- 마이크로차트-radial, 슬라이드 타일 삭제 -->
+                                <!-- <SlideTile width="15rem" class="sapUiTinyMarginBegin sapUiTinyMarginTop">
+                                -->
+                                <GenericTile
+                                    press="onPopover"
+                                    header="불량률"
+                                    width="15rem"
+                                    frameType="OneByOne"
+                                    class="sapUiSmallMarginTop"
+                                    subheader="퍼센트 확인">
+                                    <tileContent >
+                                        <TileContent >
+                                            <content >
+                                                <mc:RadialMicroChart
+                                                    class="sapUiSmallMarginBottom"
+                                                    id="idMicro"
+                                                    size="L"
+                                                    percentage="0"
+                                                    valueColor="Error"
+                                                    press="press"/>
+                                            </content>
+                                        </TileContent>
+                                    </tileContent>
+                                </GenericTile>
+                                <GenericTile
+                                    press="onPopover"
+                                    header="총 생산량"
+                                    width="15rem"
+                                    frameType="OneByOne"
+                                    class="sapUiSmallMarginTop"
+                                    subheader="">
+                                    <TileContent id="idTitle" footer="월 생산량">
+                                        <NumericContent
+                                            id="idnc1"
+                                            truncateValueTo=""
+                                            scale="EA"
+                                            value=""
+                                            icon="sap-icon://line-charts"
+                                            withMargin="false"/>
+
+                                    </TileContent>
+                                </GenericTile>
+                                <!-- </SlideTile > -->
+                            </VBox>
+                            <l:HorizontalLayout >
+                                <l:Grid containerQuery="true" position="Right" width="100%">
+                                    <viz:VizFrame
+                                        id="Chart"
+                                        width="745px"
+                                        uiConfig="{applicationSet:'fiori'}"
+                                        vizProperties="{
+                                                        'title' : { 'visible' : true , text : '생산완료 차트'},
+                                                        'legendGroup':{layout:{position: 'right'}},
+                                                        'plotArea': {
+                                                            drawingEffect: 'glossy',
+                                                            dataLabel: { visible: true, type:'value'}
+                                                        }
+                                                    }"
+                                        vizType='pie'
+                                        selectData="onSelectData">
+                                        <viz:dataset>
+                                            <viz.data:FlattenedDataset data="{main>/Chart}">
+                                                <viz.data:dimensions>
+                                                    <viz.data:DimensionDefinition name="상품명" value="{main>Gdname}"/>
+                                                </viz.data:dimensions>
+                                                <viz.data:measures>
+                                                    <viz.data:MeasureDefinition name="생산량" value="{main>Quan}"/>
+                                                </viz.data:measures>
+                                            </viz.data:FlattenedDataset>
+                                        </viz:dataset>
+
+                                        <viz:feeds>
+                                            <viz.feeds:FeedItem uid="size" type="Measure" values="생산량"/>
+                                            <viz.feeds:FeedItem uid="color" type="Dimension" values="상품명"/>
+                                        </viz:feeds>
+                                    </viz:VizFrame>
+                                </l:Grid >
+                            </l:HorizontalLayout>
+                        </HBox>
+
+                    </VBox>
+                </l:Grid>
+            </content>
+        </IconTabBar>
+
+        <!-- <core:Fragment fragmentName="ddppprdmanager.view.fragment.popover"
+        type="XML"/> -->
+    </Page>
+    <!-- <ux:ObjectPageLayout
+        id="ObjectPageLayout"
+        showTitleInHeaderContent="true"
+        showEditHeaderButton="true"
+        editHeaderButtonPress="handleEditBtnPress"
+        upperCaseAnchorBar="false">
+        <ux:headerTitle>
+            <ux:ObjectPageDynamicHeaderTitle>
+
+                <ux:expandedHeading>
+                    <m:HBox>
+                        <m:Title text="Denise Smith" wrapping="true"/>
+                    </m:HBox>
+                </ux:expandedHeading>
+
+                <ux:snappedHeading>
+                    <m:FlexBox fitContainer="true" alignItems="Center">
+                        <m:Title text="Denise Smith" wrapping="true"/>
+                    </m:FlexBox>
+                </ux:snappedHeading>
+
+            </ux:ObjectPageDynamicHeaderTitle>
+        </ux:headerTitle>
+
+        <ux:headerContent>
+            <m:FlexBox wrap="Wrap"></m:FlexBox>
+        </ux:headerContent>
+
+        <ux:sections>
+            <ux:ObjectPageSection
+                titleUppercase="false"
+                id="goalsSection"
+                title="2014 Goals Plan">
+                <ux:heading>
+                    <m:MessageStrip
+                        text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+                        type="Error"/>
+                </ux:heading>
+                <ux:subSections>
+                    <ux:ObjectPageSubSection id="goalsSectionSS1">
+                        <ux:blocks>
+                            <goals:GoalsBlock id="goalsblock"/>
+                        </ux:blocks>
+                    </ux:ObjectPageSubSection>
+                </ux:subSections>
+            </ux:ObjectPageSection>
+        </ux:sections>
+    </ux:ObjectPageLayout> -->
+</mvc:View>

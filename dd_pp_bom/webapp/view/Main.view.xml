@@ -1,0 +1,119 @@
+<mvc:View
+    controllerName="fiorippbom.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+    xmlns:tnt="sap.tnt">
+    <Page id="page" title="BOM CRUD 연습">
+        <VBox >
+            <fb:FilterBar
+                id="filterbar"
+                filterContainerWidth="24rem"
+                persistencyKey="myPersKey"
+                useToolbar="false"
+                search=".onSearch"
+                filterChange=".onFilterChange"
+                afterVariantLoad=".onAfterVariantLoad">
+                <fb:filterGroupItems>
+                    <fb:FilterGroupItem
+                        name="BOMID"
+                        label="BOMID"
+                        groupName="Group1"
+                        visibleInFilterBar="true">
+                        <fb:control>
+                            <Input
+                                id="BOMidID"
+                                width="200px"
+                                placeholder="BOM ID"
+                                showValueHelp="true"
+                                valueHelpRequest="onValueHelp"/>
+                        </fb:control>
+                    </fb:FilterGroupItem>
+                    <fb:FilterGroupItem
+                        name="ProductName"
+                        label="ProductName"
+                        groupName="Group1"
+                        visibleInFilterBar="true">
+                        <fb:control>
+                            <ComboBox
+                                id="comboid"
+                                name="ProductName"
+                                showSecondaryValues="true"
+                                selectionChange=".onSelectionChange"
+                                items="{
+                                            path: '/BOM_HSet',
+                                            templateShareable: true
+										}">
+                                <core:ListItem key="{Gdname}" text="{Gdname}" additionalText="{Gdcode}"/>
+                            </ComboBox>
+                        </fb:control>
+                    </fb:FilterGroupItem>
+                </fb:filterGroupItems>
+            </fb:FilterBar>
+            <Table id="idbomTable" inset="false" items="{/BOM_HSet}">
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <content>
+                            <Title text="BOM 헤더" level="H2"/>
+                        </content>
+                    </OverflowToolbar>
+                </headerToolbar>
+                <columns >
+
+                    <Column>
+                        <Text text="BOMID"/>
+                    </Column>
+                    <Column width="5rem">
+                        <Text text="품목코드"/>
+                    </Column>
+                    <Column width="20rem" minScreenWidth="Tablet" demandPopin="true">
+                        <Text text="품목명"/>
+                    </Column>
+                    <Column minScreenWidth="Tablet" demandPopin="true">
+                        <Text text="품목구분"/>
+                    </Column>
+                    <Column minScreenWidth="Tablet" demandPopin="true">
+                        <Text text="생성자"/>
+                    </Column>
+                    <Column minScreenWidth="Tablet" demandPopin="true">
+                        <Text text="생성날짜"/>
+                    </Column>
+
+                    <Column minScreenWidth="Tablet" demandPopin="true">
+                        <Text text="생성시간"/>
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem type="Navigation" press=".onListItemPress">
+                        <cells>
+                            <tnt:InfoLabel
+                                id="idbomid"
+                                text="{Bomid}"
+                                renderMode="Narrow"
+                                colorScheme="{= ${Delflag} ? 2 : 6 }"/>
+                            <Text text="{Gdcode}"/>
+                            <Text text="{Gdname}"/>
+                            <Text text="완제품"/>
+                            <Text text="{Crnam}"/>
+                            <Text
+                                text="{
+                                            path: 'Erdat',
+                                            formatter: '.formatter.fnDateToString'}"/>
+                            <Text
+                                text="{
+                                            path : 'Ertim',
+                                            type: 'sap.ui.model.odata.type.Time',
+                                            formatOptions: {
+                                                pattern : 'HH:mm:ss'
+                                            }
+                                        }"/>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </VBox>
+    </Page>
+</mvc:View>

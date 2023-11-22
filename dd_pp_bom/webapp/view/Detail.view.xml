@@ -1,0 +1,187 @@
+<mvc:View
+    displayBlock="true"
+    controllerName="fiorippbom.controller.Detail"
+    height="100%"
+    xmlns="sap.uxap"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:m="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:viz="sap.viz.ui5.controls"
+    xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+    xmlns:viz.data="sap.viz.ui5.data">
+    <ObjectPageLayout
+        id="ObjectPageLayout"
+        showTitleInHeaderContent="true"
+        alwaysShowContentHeader="false"
+        preserveHeaderStateOnScroll="false"
+        headerContentPinnable="true"
+        isChildPage="true"
+        upperCaseAnchorBar="false">
+        <headerTitle>
+            <ObjectPageDynamicHeaderTitle>
+                <expandedHeading>
+                    <m:Title id="headerKey" text="" wrapping="true" class="sapUiSmallMarginEnd"/>
+                </expandedHeading>
+
+
+                <navigationActions>
+                    <m:OverflowToolbarButton
+                        type="Transparent"
+                        icon="sap-icon://full-screen"
+                        press="handleFullScreen"
+                        id="enterFullScreenBtn"
+                        tooltip="Enter Full Screen Mode"
+                        visible="{= ${/actionButtonsInfo/midColumn/fullScreen} !== null }"/>
+                    <m:OverflowToolbarButton
+                        type="Transparent"
+                        icon="sap-icon://exit-full-screen"
+                        press="handleExitFullScreen"
+                        id="exitFullScreenBtn"
+                        tooltip="Exit Full Screen Mode"
+                        visible="{= ${/actionButtonsInfo/midColumn/exitFullScreen} !== null }"/>
+                    <m:OverflowToolbarButton
+                        type="Transparent"
+                        icon="sap-icon://decline"
+                        press="handleClose"
+                        tooltip="Close middle column"
+                        visible="{= ${/actionButtonsInfo/midColumn/closeColumn} !== null }"/>
+                </navigationActions>
+            </ObjectPageDynamicHeaderTitle>
+        </headerTitle>
+
+        <sections>
+            <ObjectPageSection title="완제품 정보">
+                <subSections>
+                    <ObjectPageSubSection>
+                        <blocks>
+                            <form:SimpleForm
+                                maxContainerCols="2"
+                                editable="false"
+                                layout="ResponsiveGridLayout"
+                                labelSpanL="12"
+                                labelSpanM="12"
+                                emptySpanL="1"
+                                emptySpanM="1"
+                                columnsL="1"
+                                columnsM="1">
+                                <form:content>
+                                    <m:Toolbar>
+                                        <m:Button id="idback" text="이전 화면" press="handleClose" width="8rem"/>
+
+                                        <m:ToolbarSpacer/>
+                                        <m:Button id="idflag" text="" type="Emphasized" width="8rem" press="onDelflag"/>
+                                    </m:Toolbar>
+
+                                    <m:Label text="BOM ID"/>
+                                    <m:Text id="BOMitemid" text=""/>
+                                    <m:Label text="품목명"/>
+                                    <m:Text id="GDNAMEid" text=""/>
+                                </form:content>
+                            </form:SimpleForm>
+                        </blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+
+            <ObjectPageSection title="BOM 아이템">
+                <subSections>
+                    <ObjectPageSubSection>
+                        <blocks>
+                            <m:Table
+                                id="BOMitemTable"
+                                mode="SingleSelectMaster"
+                                itemPress="handleItemPress"
+                                items="{ 
+                                    path  : '/BOM_ISet',
+                                    sorter : [{
+                                        path : 'GdcodeM',
+                                        descending : false
+                                        }]
+                                }"
+                                >
+                                <m:headerToolbar>
+                                    <m:OverflowToolbar>
+                                        <m:content>
+                                            <m:Title text="BOM 아이템" level="H2"/>
+                                        </m:content>
+                                    </m:OverflowToolbar>
+                                </m:headerToolbar>
+                                <m:columns >
+                                    <m:Column>
+                                        <m:Text text="BOMID"/>
+                                    </m:Column>
+                                    <m:Column width="5rem">
+                                        <m:Text text="품목코드"/>
+                                    </m:Column>
+                                    <m:Column width="20rem">
+                                        <m:Text text="품목명"/>
+                                    </m:Column>
+                                    <m:Column>
+                                        <m:Text text="품목구분"/>
+                                    </m:Column>
+                                    <m:Column>
+                                        <m:Text text="수량"/>
+                                    </m:Column>
+                                    <m:Column>
+                                        <m:Text text="단위"/>
+                                    </m:Column>
+                                </m:columns>
+                                <m:items>
+
+                                    <m:ColumnListItem vAlign="Middle" press="onBOM">
+                                        <m:cells>
+                                            <m:Text text="{Bomid}"/>
+                                            <m:Text text="{GdcodeM}"/>
+                                            <m:Text text="{GdnameM}"/>
+                                            <m:Text text="{= (${MtcodeM}) === 'A' ? '원자재' : '부자재'}"/>
+                                            <m:Text text="{Quan}"/>
+                                            <m:Text text="{Unit}"/>
+                                        </m:cells>
+                                    </m:ColumnListItem>
+                                </m:items>
+                            </m:Table>
+                        </blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+
+            </ObjectPageSection>
+
+            <ObjectPageSection title="BOM 아이템">
+                <subSections>
+                    <ObjectPageSubSection title="stack bar">
+                        <blocks>
+                            <viz:VizFrame
+                                id="oVizFrame"
+                                uiConfig="{applicationSet:'fiori'}"
+                                vizType='stacked_bar'>
+                                <viz:dataset>
+                                    <viz.data:FlattenedDataset id="idflatdata" data="{/BOM_ISet}">
+                                        <viz.data:dimensions>
+                                            <viz.data:DimensionDefinition name="품목명" value="{GdnameM}"/>
+
+                                        </viz.data:dimensions>
+                                        <viz.data:measures>
+                                            <viz.data:MeasureDefinition name="Quan" value="{Quan}"/>
+
+                                        </viz.data:measures>
+                                    </viz.data:FlattenedDataset>
+                                </viz:dataset>
+
+                                <viz:feeds>
+                                    <viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="품목명"/>
+                                    <viz.feeds:FeedItem uid="valueAxis" type="Measure" values="Quan"/>
+
+                                </viz:feeds>
+                                <viz:dependents>
+                                    <viz:Popover id="idPopOver"></viz:Popover>
+                                </viz:dependents>
+                            </viz:VizFrame>
+                        </blocks>
+
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+        </sections>
+    </ObjectPageLayout>
+</mvc:View>
