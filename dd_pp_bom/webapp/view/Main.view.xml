@@ -8,6 +8,7 @@
     xmlns:core="sap.ui.core"
     xmlns:tnt="sap.tnt">
     <Page id="page" title="BOM CRUD 연습">
+     <core:Fragment fragmentName="fiorippbom.view.fragment.Create" type="XML" />
         <VBox >
             <fb:FilterBar
                 id="filterbar"
@@ -42,7 +43,6 @@
                                 id="comboid"
                                 name="ProductName"
                                 showSecondaryValues="true"
-                                selectionChange=".onSelectionChange"
                                 items="{
                                             path: '/BOM_HSet',
                                             templateShareable: true
@@ -58,6 +58,8 @@
                     <OverflowToolbar>
                         <content>
                             <Title text="BOM 헤더" level="H2"/>
+                            <ToolbarSpacer />
+                            <Button text="생성" type="Emphasized" press="onCreateDialog"></Button>
                         </content>
                     </OverflowToolbar>
                 </headerToolbar>

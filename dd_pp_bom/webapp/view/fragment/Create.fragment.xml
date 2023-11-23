@@ -1,0 +1,153 @@
+<core:FragmentDefinition
+    xmlns:smartfield="sap.ui.comp.smartfield"
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core">
+    <Dialog id="createDialog" title="Hello {/recipient/name}">
+        <content>
+            <HBox >
+                <VBox class="sapUiSmallMargin" id="formContainer">
+                    <f:SimpleForm
+                        id="BomHeaderinfo"
+                        editable="true"
+                        layout="ColumnLayout"
+                        columnsM="2"
+                        columnsL="2"
+                        columnsXL="2">
+                        <Toolbar >
+                            <Title text="BOM 헤더 정보"></Title>
+                            <ToolbarSpacer/>
+                            <Button type="Emphasized" text="리스트 추가" press="onItemadd"/>
+                        </Toolbar>
+                        <f:content>
+                            <Label text="품목코드"/>
+                            <ComboBox
+                                id="idCreateGdcode"
+                                name="CreateGdcode"
+                                showSecondaryValues="true"
+                                selectionChange=".onSelectionChange"
+                                items="{
+                                            path: '/MtmasterSet',
+                                            templateShareable: true
+										}">
+                                <core:ListItem key="{Gdcode}" text="{Gdcode}" additionalText="{Gdname}"/>
+                            </ComboBox>
+                            <Label text="품목명"/>
+                            <ComboBox
+                                id="idCreateGdname"
+                                name="CreateGdname"
+                                showSecondaryValues="true"
+                                selectionChange=".onSelectionChange"
+                                items="{
+                                            path: '/MtmasterSet',
+                                            templateShareable: true
+										}">
+                                <core:ListItem key="{Gdname}" text="{Gdname}" additionalText="{Gdcode}"/>
+                            </ComboBox>
+                        </f:content>
+                    </f:SimpleForm>
+                    <f:SimpleForm
+                        id="BomIteminfo"
+                        editable="true"
+                        layout="ColumnLayout"
+                        columnsM="2"
+                        columnsL="2"
+                        columnsXL="2">
+                        <Toolbar >
+                            <Title text="BOM 아이템 정보"></Title>
+                        </Toolbar>
+                        <f:content>
+                            <Label text="품목코드"/>
+                            <ComboBox
+                                id="idCreateitemGdcode"
+                                name="CreateitemGdcode"
+                                showSecondaryValues="true"
+                                selectionChange=".onSelectionChange"
+                                items="{
+                                            path: '/MtmasterSet',
+                                            templateShareable: true,
+                                            sorter: {
+                                                path: 'Gdcode',
+                                                descending: false
+                                            }
+										}">
+                                <core:ListItem key="{Gdcode}" text="{Gdcode}" additionalText="{Gdname}"/>
+                            </ComboBox>
+                            <Label text="품목명"/>
+                            <ComboBox
+                                id="idCreateitemGdname"
+                                name="CreateitemGdname"
+                                showSecondaryValues="true"
+                                selectionChange=".onSelectionChange"
+                                items="{
+                                            path: '/MtmasterSet',
+                                            templateShareable: true,
+                                            sorter: {
+                                                path: 'Gdcode',
+                                                descending: false
+                                            }
+										}">
+                                <core:ListItem key="{Gdname}" text="{Gdname}" additionalText="{Gdcode}"/>
+                            </ComboBox>
+                            <Label text="수량"/>
+                            <Input id="idCreateitemQuan" value=""/>
+                        </f:content>
+                    </f:SimpleForm>
+                </VBox>
+                <VBox width="90%">
+                    <Table id="idCreateTable" items="{addTable>/list}" inset="false">
+                        <headerToolbar>
+                            <OverflowToolbar>
+                                <content>
+                                    <Title text="추가된 리스트" level="H2"/>
+                                    <ToolbarSpacer/>
+                                    <Button text="클리어"></Button>
+                                </content>
+                            </OverflowToolbar>
+                        </headerToolbar>
+                        <columns >
+                            <Column width="5rem" hAlign="Center">
+                                <Text text="품목코드"/>
+                            </Column>
+                            <Column width="20rem" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+                                <Text text="품목명"/>
+                            </Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+                                <Text text="품목구분"/>
+                            </Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true" hAlign="Right">
+                                <Text text="수량"/>
+                            </Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true">
+                                <Text text="단위"/>
+                            </Column>
+                            <Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+                                <Text text="삭제"/>
+                            </Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem press=".onListItemPress">
+                                <cells>
+                                    <Text text="{addTable>Gdcode_m}"/>
+                                    <Text text="{addTable>Gdname_m}"/>
+                                    <Text text="{addTable>Mtcode_m}"/>
+                                    <Text text="{addTable>Quan}"/>
+                                    <Text text="{addTable>Unit}"/>
+                                    <core:Icon src="sap-icon://decline" color="#0054FF" press="onDecline"></core:Icon>
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                </VBox>
+            </HBox>
+            <Toolbar>
+                <ToolbarSpacer/>
+                <Button type="Success" text="확인" press="onCreate"/>
+                <Button type="Negative" text="취소" press="onClose"/>
+            </Toolbar>
+
+        </content>
+
+    </Dialog>
+</core:FragmentDefinition>

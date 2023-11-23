@@ -108,22 +108,22 @@
                                     </m:OverflowToolbar>
                                 </m:headerToolbar>
                                 <m:columns >
-                                    <m:Column>
+                                    <m:Column minScreenWidth="Tablet">
                                         <m:Text text="BOMID"/>
                                     </m:Column>
-                                    <m:Column width="5rem">
+                                    <m:Column width="5rem" >
                                         <m:Text text="품목코드"/>
                                     </m:Column>
-                                    <m:Column width="20rem">
+                                    <m:Column width="20rem" minScreenWidth="Tablet" demandPopin="true">
                                         <m:Text text="품목명"/>
                                     </m:Column>
-                                    <m:Column>
+                                    <m:Column minScreenWidth="Tablet" demandPopin="true">
                                         <m:Text text="품목구분"/>
                                     </m:Column>
-                                    <m:Column>
+                                    <m:Column minScreenWidth="Tablet" demandPopin="true">
                                         <m:Text text="수량"/>
                                     </m:Column>
-                                    <m:Column>
+                                    <m:Column minScreenWidth="Tablet" demandPopin="true">
                                         <m:Text text="단위"/>
                                     </m:Column>
                                 </m:columns>

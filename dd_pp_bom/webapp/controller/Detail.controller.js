@@ -2,12 +2,13 @@ sap.ui.define(
     ["sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
     'sap/ui/model/Filter',
-    "sap/ui/core/routing/History"
+    "sap/ui/core/routing/History",
+    "sap/m/MessageToast"
   ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller, JSONModel, Filter, History) {
+    function (Controller, JSONModel, Filter, History, MessageToast) {
       "use strict";
   
       return Controller.extend("fiorippbom.controller.Detail", {
@@ -61,44 +62,48 @@ sap.ui.define(
         },
 
       onDelflag(oEvent) {
-        debugger;
         let btnText = oEvent.getSource().getText(),
             oModel = this.getView().getModel(),
             oBomid = this.byId("BOMitemid").getText(),
             obj = this.getView().getModel().getObject(`/BOM_HSet('${oBomid}')`);
+
+        let idClose =  this.byId("idback");
         // read 함수에서 필터링을 한 후 해당 delflag 업데이트
          switch(btnText){
-          case '가동중지' :
-            obj.Delflag = true;
-            break;
+            case '가동중지' :
+              obj.Delflag = true;
+              break;
 
-          case '가동' :
-            obj.Delflag = false;
-            break;
+            case '가동' :
+              obj.Delflag = false;
+              break;
          }
          
          // __metadata 필드는 필요없으므로 해당 필드 삭제
          delete obj.__metadata;
+         let today = new Date();
+
+         obj.Chnam = 'SNG-19';
+         obj.Chdat = today;
          
          // 업데이트를 위한 해당 키 값 찾기
          let path = oModel.createKey("/BOM_HSet", {
              Bomid : obj.Bomid
          })
          
-
          oModel.update(path, obj, {
              success : function(oReturn){
-                 sap.m.MessageToast.show("데이터 변경 완료");
-                 this.byId("idback").fireEvent('press');
-             }.bind(this),
+              debugger;
+                 MessageToast.show("데이터 변경 완료");
+                 idClose.fireEvent('press');
+             },
              error : function(oError) {
-                // sap.m.MessageToast.show("데이터 변경 실패!");
-                this.byId("idback").fireEvent('press');
-                console.log(oError)
-             }.bind(this)
+              debugger;
+                MessageToast.show(obj.Bomid + "변경 완료");
+                idClose.fireEvent('press');
+                // console.log(oError)
+             }
          });
-
-
       },
   
         /**
@@ -108,7 +113,7 @@ sap.ui.define(
           let oNextUIState = this.getOwnerComponent()
             .getHelper()
             .getNextUIState(0);
-            debugger;
+            ;
           this.oRouter.navTo("Main", { layout: oNextUIState.layout });
         },
   

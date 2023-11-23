@@ -119,7 +119,6 @@ sap.ui.define([
                                         Quan : Number(item.Quan)
                                     };
                                 }
-
                             }else{
                                 if(item.Status === '3')
                                 {

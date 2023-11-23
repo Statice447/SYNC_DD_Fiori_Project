@@ -18,7 +18,12 @@ sap.ui.define(
           this.oView = this.getView();
 
           var oModel = new JSONModel();
+          var oAddbom = new JSONModel({
+            head : [],
+            list : []
+          });
           this.getView().setModel(oModel, "head");
+          this.getView().setModel(oAddbom,"addTable")
           this.oRouter.getRoute("Main").attachPatternMatched(this._onPatternMatched, this);
         },
 
@@ -49,7 +54,7 @@ sap.ui.define(
           //           }
           //       });
   
-        //   debugger;
+          //   debugger;
           let afilter = [];
           if (oinput) {
               let oFilter =  new Filter('Bomid', 'Contains', oinput)
@@ -90,7 +95,99 @@ sap.ui.define(
             layout: "MidColumnFullScreen",
             product: this._product
           });
-        }
+        },
+
+        //생성 팝업 콤보 박스 필터 바인딩
+        onCreateDialog: function(oEvent){
+          let afilter = [];
+          let cHeadgdname = this.byId("idCreateGdname"),
+              cHeadgdcode = this.byId("idCreateGdcode");
+
+          let cItemgdname = this.byId("idCreateitemGdname"),
+              cItemgdcode = this.byId("idCreateitemGdcode");
+
+          var bomHeadFilter = new Filter('Mtcode', 'EQ', 'P'),
+              bomitemFilter = new Filter('Mtcode', 'NE', 'P');
+          
+          debugger;
+          // 콤보 박스 필터 바인딩
+          cHeadgdname.getBinding("items").filter([bomHeadFilter]);
+          cHeadgdcode.getBinding("items").filter([bomHeadFilter]);
+          cItemgdname.getBinding("items").filter([bomitemFilter]);
+          cItemgdcode.getBinding("items").filter([bomitemFilter]);
+
+          this.getView().byId("createDialog").open();
+        },
+
+        // 생성 팝업 콤보박스 필터 적용
+        onSelectionChange: function(oEvent){
+          let id = oEvent.getParameters().id.slice(-18);
+
+          switch(id){
+            // 헤더 품목코드 콤보박스
+            case 'in--idCreateGdcode':
+              var gdname = oEvent.getParameters().selectedItem.mProperties.additionalText;
+              // 헤더 품목명 자동생성
+              this.byId("idCreateGdname").setValue(gdname);
+              break;
+            
+            // 헤더 품목명 콤보박스
+            case 'in--idCreateGdname':
+              var gdcode = oEvent.getParameters().selectedItem.mProperties.additionalText;
+              // 헤더 품목명 자동생성
+              this.byId("idCreateitemGdcode").setValue(gdcode);
+              break;
+
+            // 아이템 품목명 콤보박스
+            case 'idCreateitemGdcode':
+              var gdcode = oEvent.getParameters().selectedItem.mProperties.additionalText;
+              // 아이템 품목명 자동생성
+              this.byId("idCreateitemGdname").setValue(gdcode);
+              break;
+
+            // 아이템 품목명 콤보박스
+            case 'idCreateitemGdname':
+              var gdcode = oEvent.getParameters().selectedItem.mProperties.additionalText;
+              // 아이템 품목명 자동생성
+              this.byId("idCreateitemGdcode").setValue(gdcode);
+              break;
+          }
+        },
+
+        onClose: function(oEvent){
+          oEvent.getSource().getParent().getParent().close(); 
+
+        },
+        onCreate: function(oEvent){
+
+        },
+
+        onItemadd: function(oEvent){
+          debugger;
+          let iditemgdcode = this.byId("idCreateitemGdcode").getValue(),
+              idheadgdcode = this.byId("idCreateGdcode").getValue(),
+              itemobj = this.getView().getModel().getObject(`/MtmasterSet('${iditemgdcode}')`),
+              headobj = this.getView().getModel().getObject(`/MtmasterSet('${idheadgdcode}')`),
+              oDatahead = this.getView().getModel("addTable").getProperty("/head"),
+              oDatalist = this.getView().getModel("addTable").getProperty("/list");
+
+
+          let Bomid = "", Gdcode_m = itemobj.Gdcode, Gdname_m = itemobj.Gdname, Mtcode_m = itemobj.Mtcode, Unit = "EA",
+              Quan = this.byId("idCreateitemQuan").getValue();
+
+          // let today = new Date();
+          // let Gdcode = headobj.Gdcode, Gdname = headobj.Gdname, Mtcode = 'P', Delflag = "", Crnam = "SNG-19", Erdat = today, Chdat = today;
+
+          // if(!oDatahead){
+          //   oDatahead.push({Bomid, Gdcode, Gdname, Mtcode, Delflag, Crnam, Erdat})
+          // }
+          
+              oDatalist.push({Bomid, Gdcode_m, Gdname_m, Mtcode_m, Quan, Unit});
+
+          this.getView().getModel("addTable").setProperty("/list", oDatalist);
+
+
+        },
   
       });
     }

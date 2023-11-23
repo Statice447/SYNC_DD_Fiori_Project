@@ -16,7 +16,7 @@
     xmlns:viz="sap.viz.ui5.controls"
     xmlns:fr="sap.ui.core.Fragment"
     xmlns:ux="sap.uxap">
-     <Page id="page" title="생산 현황 관리" class="title">
+     <Page id="page" title="생산 현황 관리" class="sapUiResponsivePadding--header">
         <!-- 뷰에서 프래그먼트 선언 -->
         <!-- 아이콘 탭바 위치-->
 
