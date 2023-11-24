@@ -12,6 +12,7 @@
                         id="BomHeaderinfo"
                         editable="true"
                         layout="ColumnLayout"
+                        width="20rem"
                         columnsM="2"
                         columnsL="2"
                         columnsXL="2">
@@ -23,8 +24,8 @@
                         <f:content>
                             <Label text="품목코드"/>
                             <ComboBox
-                                id="idCreateGdcode"
-                                name="CreateGdcode"
+                                id="idheadGdcode"
+                                name="Gdcode"
                                 showSecondaryValues="true"
                                 selectionChange=".onSelectionChange"
                                 items="{
@@ -35,8 +36,9 @@
                             </ComboBox>
                             <Label text="품목명"/>
                             <ComboBox
-                                id="idCreateGdname"
-                                name="CreateGdname"
+                                id="idheadGdname"
+                                name="headGdname"
+                                editable="false"
                                 showSecondaryValues="true"
                                 selectionChange=".onSelectionChange"
                                 items="{
@@ -51,6 +53,7 @@
                         id="BomIteminfo"
                         editable="true"
                         layout="ColumnLayout"
+                        width="20rem"
                         columnsM="2"
                         columnsL="2"
                         columnsXL="2">
@@ -60,8 +63,8 @@
                         <f:content>
                             <Label text="품목코드"/>
                             <ComboBox
-                                id="idCreateitemGdcode"
-                                name="CreateitemGdcode"
+                                id="iditemGdcode"
+                                name="itemGdcode"
                                 showSecondaryValues="true"
                                 selectionChange=".onSelectionChange"
                                 items="{
@@ -76,8 +79,9 @@
                             </ComboBox>
                             <Label text="품목명"/>
                             <ComboBox
-                                id="idCreateitemGdname"
-                                name="CreateitemGdname"
+                                id="iditemGdname"
+                                name="itemGdname"
+                                editable="false"
                                 showSecondaryValues="true"
                                 selectionChange=".onSelectionChange"
                                 items="{
@@ -91,12 +95,12 @@
                                 <core:ListItem key="{Gdname}" text="{Gdname}" additionalText="{Gdcode}"/>
                             </ComboBox>
                             <Label text="수량"/>
-                            <Input id="idCreateitemQuan" value=""/>
+                            <Input id="iditemQuan" value=""/>
                         </f:content>
                     </f:SimpleForm>
                 </VBox>
                 <VBox width="90%">
-                    <Table id="idCreateTable" items="{addTable>/list}" inset="false">
+                    <Table id="idaddTable" items="{addTable>/Headertoitem}" inset="false">
                         <headerToolbar>
                             <OverflowToolbar>
                                 <content>
@@ -110,7 +114,7 @@
                             <Column width="5rem" hAlign="Center">
                                 <Text text="품목코드"/>
                             </Column>
-                            <Column width="20rem" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+                            <Column width="20rem" minScreenWidth="Tablet" demandPopin="true">
                                 <Text text="품목명"/>
                             </Column>
                             <Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
@@ -129,9 +133,9 @@
                         <items>
                             <ColumnListItem press=".onListItemPress">
                                 <cells>
-                                    <Text text="{addTable>Gdcode_m}"/>
-                                    <Text text="{addTable>Gdname_m}"/>
-                                    <Text text="{addTable>Mtcode_m}"/>
+                                    <Text text="{addTable>GdcodeM}"/>
+                                    <Text text="{addTable>GdnameM}"/>
+                                    <Text text="{addTable>MtcodeM}"/>
                                     <Text text="{addTable>Quan}"/>
                                     <Text text="{addTable>Unit}"/>
                                     <core:Icon src="sap-icon://decline" color="#0054FF" press="onDecline"></core:Icon>

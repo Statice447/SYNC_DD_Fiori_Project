@@ -69,6 +69,7 @@ sap.ui.define([
                 this.getView().getModel().read("/PrdmanagerSet" , {
                     filters : aFilter,
                     success : function(oReturn){
+                        // debugger;
                         oModelData.setProperty("/Prdmanage", oReturn.results);
 
                         let prmData = oReturn.results;
