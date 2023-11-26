@@ -4,7 +4,7 @@
     xmlns:f="sap.ui.layout.form"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:core="sap.ui.core">
-    <Dialog id="createDialog" title="Hello {/recipient/name}">
+    <Dialog id="createDialog" title="BOM 생성 화면">
         <content>
             <HBox >
                 <VBox class="sapUiSmallMargin" id="formContainer">
@@ -17,7 +17,7 @@
                         columnsL="2"
                         columnsXL="2">
                         <Toolbar >
-                            <Title text="BOM 헤더 정보"></Title>
+                            <Title text="완제품 정보"></Title>
                             <ToolbarSpacer/>
                             <Button type="Emphasized" text="리스트 추가" press="onItemadd"/>
                         </Toolbar>
@@ -58,7 +58,7 @@
                         columnsL="2"
                         columnsXL="2">
                         <Toolbar >
-                            <Title text="BOM 아이템 정보"></Title>
+                            <Title text="원자재,부자재 정보"></Title>
                         </Toolbar>
                         <f:content>
                             <Label text="품목코드"/>
@@ -95,49 +95,50 @@
                                 <core:ListItem key="{Gdname}" text="{Gdname}" additionalText="{Gdcode}"/>
                             </ComboBox>
                             <Label text="수량"/>
-                            <Input id="iditemQuan" value=""/>
+                            <Input id="iditemQuan" width="auto" value=""/>
+                            <Input id="iditemUnit" width="3rem" value="EA" editable="false" />
+
                         </f:content>
                     </f:SimpleForm>
                 </VBox>
-                <VBox width="90%">
-                    <Table id="idaddTable" items="{addTable>/Headertoitem}" inset="false">
+                <VBox width="50rem">
+                    <Table id="idaddTable" items="{addbom>/BOM_ISet}" inset="false">
                         <headerToolbar>
                             <OverflowToolbar>
                                 <content>
-                                    <Title text="추가된 리스트" level="H2"/>
-                                    <ToolbarSpacer/>
-                                    <Button text="클리어"></Button>
+                                    <Title id="idtabletitle" text="추가된 리스트" level="H2"/>
+                                    <!-- <ToolbarSpacer/> <Button text="클리어"></Button> -->
                                 </content>
                             </OverflowToolbar>
                         </headerToolbar>
                         <columns >
-                            <Column width="5rem" hAlign="Center">
+                            <Column width="4rem" hAlign="Center">
                                 <Text text="품목코드"/>
                             </Column>
-                            <Column width="20rem" minScreenWidth="Tablet" demandPopin="true">
+                            <Column width="10rem" minScreenWidth="Tablet" demandPopin="true">
                                 <Text text="품목명"/>
                             </Column>
-                            <Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+                            <Column width="5rem" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
                                 <Text text="품목구분"/>
                             </Column>
-                            <Column minScreenWidth="Tablet" demandPopin="true" hAlign="Right">
+                            <Column width="3rem" minScreenWidth="Tablet" demandPopin="true" hAlign="Right">
                                 <Text text="수량"/>
                             </Column>
-                            <Column minScreenWidth="Tablet" demandPopin="true">
+                            <Column width="3rem" minScreenWidth="Tablet" demandPopin="true">
                                 <Text text="단위"/>
                             </Column>
-                            <Column minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+                            <Column width="3rem" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
                                 <Text text="삭제"/>
                             </Column>
                         </columns>
                         <items>
                             <ColumnListItem press=".onListItemPress">
                                 <cells>
-                                    <Text text="{addTable>GdcodeM}"/>
-                                    <Text text="{addTable>GdnameM}"/>
-                                    <Text text="{addTable>MtcodeM}"/>
-                                    <Text text="{addTable>Quan}"/>
-                                    <Text text="{addTable>Unit}"/>
+                                    <Text text="{addbom>GdcodeM}"/>
+                                    <Text text="{addbom>GdnameM}"/>
+                                    <Text text="{addbom>MtcodeM}"/>
+                                    <Text text="{addbom>Quan}"/>
+                                    <Text text="{addbom>Unit}"/>
                                     <core:Icon src="sap-icon://decline" color="#0054FF" press="onDecline"></core:Icon>
                                 </cells>
                             </ColumnListItem>

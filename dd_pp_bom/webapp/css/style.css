@@ -1,1 +1,9 @@
 /* Enter your custom styles here */
+#application-fiorippbom-display-component---Main--page-title{
+    font-size: 22px;
+    font-weight: bold;
+}
+#application-fiorippbom-display-component---Main--createDialog-title-inner{
+    font-size: 22px;
+    font-weight: bold;
+}

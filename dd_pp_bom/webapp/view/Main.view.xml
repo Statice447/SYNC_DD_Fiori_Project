@@ -7,8 +7,8 @@
     xmlns:f="sap.f"
     xmlns:core="sap.ui.core"
     xmlns:tnt="sap.tnt">
-    <Page id="page" title="BOM CRUD 연습">
-     <core:Fragment fragmentName="fiorippbom.view.fragment.Create" type="XML" />
+    <Page id="page" title="BOM 관리" class="sapUiResponsivePadding--header">
+        <core:Fragment fragmentName="fiorippbom.view.fragment.Create" type="XML"/>
         <VBox >
             <fb:FilterBar
                 id="filterbar"
@@ -19,28 +19,18 @@
                 filterChange=".onFilterChange"
                 afterVariantLoad=".onAfterVariantLoad">
                 <fb:filterGroupItems>
-                    <fb:FilterGroupItem
-                        name="BOMID"
-                        label="BOMID"
-                        groupName="Group1"
-                        visibleInFilterBar="true">
-                        <fb:control>
-                            <Input
-                                id="BOMidID"
-                                width="200px"
-                                placeholder="BOM ID"
-                                showValueHelp="true"
-                                valueHelpRequest="onValueHelp"/>
-                        </fb:control>
-                    </fb:FilterGroupItem>
+                    <!-- <fb:FilterGroupItem name="BOMID" label="BOMID" groupName="Group1"
+                    visibleInFilterBar="true"> <fb:control> <Input id="BOMidID" width="200px"
+                    placeholder="BOM ID" showValueHelp="true" valueHelpRequest="onValueHelp"/>
+                    </fb:control> </fb:FilterGroupItem> -->
                     <fb:FilterGroupItem
                         name="ProductName"
-                        label="ProductName"
+                        label="품목명"
                         groupName="Group1"
                         visibleInFilterBar="true">
                         <fb:control>
                             <ComboBox
-                                id="comboid"
+                                id="gdnameid"
                                 name="ProductName"
                                 showSecondaryValues="true"
                                 items="{
@@ -51,15 +41,31 @@
                             </ComboBox>
                         </fb:control>
                     </fb:FilterGroupItem>
+                    <fb:FilterGroupItem
+                        name="Status"
+                        label="가동 여부"
+                        groupName="Group1"
+                        visibleInFilterBar="false">
+                        <fb:control>
+                            <ComboBox
+                                id="statusid"
+                                name="Status"
+                                showSecondaryValues="true">
+                            <core:ListItem key="true" text="가동 중" />
+                            <core:ListItem key="false" text="가동 중지" />
+
+                            </ComboBox>
+                        </fb:control>
+                    </fb:FilterGroupItem>
                 </fb:filterGroupItems>
             </fb:FilterBar>
             <Table id="idbomTable" inset="false" items="{/BOM_HSet}">
                 <headerToolbar>
                     <OverflowToolbar>
                         <content>
-                            <Title text="BOM 헤더" level="H2"/>
-                            <ToolbarSpacer />
-                            <Button text="생성" type="Emphasized" press="onCreateDialog"></Button>
+                            <Title text="BOM 리스트" level="H2"/>
+                            <ToolbarSpacer/>
+                            <Button text="BOM 생성" type="Emphasized" press="onCreateDialog"></Button>
                         </content>
                     </OverflowToolbar>
                 </headerToolbar>
