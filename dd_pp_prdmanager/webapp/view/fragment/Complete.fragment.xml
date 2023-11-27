@@ -1,0 +1,58 @@
+<core:FragmentDefinition
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form">
+    <Dialog id="completeDialog" title="최종 검수 화면">
+        <content>
+            <HBox >
+                <VBox class="sapUiSmallMargin" id="formContainer">
+                    <f:SimpleForm
+                        id="completeForm"
+                        editable="true"
+                        layout="ColumnLayout"
+                        width="20rem"
+                        columnsM="2"
+                        columnsL="2"
+                        columnsXL="2">
+                        <f:content>
+                            <Label text="생산관리번호"/>
+                            <Input id="idcomPrmnum" editable="false" width="auto" value="{complete>/Prmnum}"/>
+
+                            <Label text="공장명"/>
+                            <Input id="idcomPlcode" editable="false" width="auto" value="{complete>/Plcode}"/>
+
+                            <Label text="품목코드"/>
+                            <Input id="idcomGdcode" editable="false" width="auto" value="{complete>/Gdcode}"/>
+                            <Input id="idcomStatus" visible="false" width="auto" value="{complete>/Status}"/>
+
+                            <Label text="품목명"/>
+                            <Input id="idcomGdname" editable="false" width="auto" value="{complete>/Gdname}"/>
+
+                            <Label text="총 생산수량"/>
+                            <Input id="idcomTatalQuan" editable="false" width="auto" value="{complete>/Quan}"/>
+                            <Input id="idcomTotalUnit" editable="false" width="auto" value="EA"/>
+
+                            <Label text="정상수량"/>
+                            <Input id="idcomNomalQuan" width="auto" value=""/>
+                            <Input id="idcomNomalUnit" editable="false" width="auto" value="EA"/>
+
+                            <Label text="불량수량"/>
+                            <Input id="idcomDisposalQuan" width="auto" value=""/>
+                            <Input id="idcomDisposalUnit" editable="false" width="auto" value="EA"/>
+
+                        </f:content>
+                    </f:SimpleForm>
+                </VBox>
+                
+            </HBox>
+            <Toolbar>
+                <ToolbarSpacer/>
+                <Button type="Success" text="확인" press="onComCreate"/>
+                <Button type="Negative" id="idComClose" text="취소" press="onComClose"/>
+            </Toolbar>
+
+        </content>
+
+    </Dialog>
+</core:FragmentDefinition>

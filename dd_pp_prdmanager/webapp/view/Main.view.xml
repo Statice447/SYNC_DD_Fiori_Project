@@ -18,8 +18,9 @@
     xmlns:ux="sap.uxap">
      <Page id="page" title="생산 현황 관리" class="sapUiResponsivePadding--header">
         <!-- 뷰에서 프래그먼트 선언 -->
-        <!-- 아이콘 탭바 위치-->
+        <core:Fragment fragmentName="ddppprdmanager.view.fragment.Complete" type="XML"/>
 
+        <!-- 아이콘 탭바 위치-->
         <IconTabBar id="idIconTabBar" select=".onFilterSelect">
             <items>
                 <IconTabFilter
@@ -242,8 +243,7 @@
                                                             dataLabel: { visible: true, type:'value'}
                                                         }
                                                     }"
-                                        vizType='pie'
-                                        selectData="onSelectData">
+                                        vizType='pie'>
                                         <viz:dataset>
                                             <viz.data:FlattenedDataset data="{main>/Chart}">
                                                 <viz.data:dimensions>
