@@ -161,7 +161,7 @@ sap.ui.define(
           var bomHeadFilter = new Filter('Mtcode', 'EQ', 'P'),
               bomitemFilter = new Filter('Mtcode', 'NE', 'P');
           
-          debugger;
+
           // 콤보 박스 필터 바인딩
           cHeadgdname.getBinding("items").filter([bomHeadFilter]);
           cHeadgdcode.getBinding("items").filter([bomHeadFilter]);
@@ -214,7 +214,7 @@ sap.ui.define(
             'Mtcode' : '',
             BOM_ISet : []
           };
-          debugger;
+
           // 테이블 리스트 초기화
           oModel.setProperty("/",oData);
 
@@ -237,34 +237,37 @@ sap.ui.define(
 
           // var oHeadData = oHeadModel.getData(),
           //     oItemData = oItemModel.getProperty("/Bomitem");
-          var oModel = this.getView().getModel();
-          var oBomModel = this.getView().getModel("addbom");
-          var oBomData = oBomModel.getData();
+          var oView = this.getView(),
+              oModel = oView.getModel(),
+              oBomModel = oView.getModel("addbom"),
+              oBomData = oBomModel.getData();
 
-          var oBomData = {
-              "Gdcode" : "P099",
-              "Gdname" : "테스트용",
-              "Mtcode" : "P"
-              // 'BOM_ISet' : []
-              //   {
-              //     "GdcodeM" : "A099",
-              //     "GdnameM" : "테스트용",
-              //     "MtcodeM" : "A",
-              //   }
-              // ]
-          }
+          // var oBomData = {
+          //     "Gdcode" : "P099",
+          //     "Gdname" : "테스트용",
+          //     "Mtcode" : "P",
+          //     'BOM_ISet' : [
+          //       {
+          //         "GdcodeM" : "A099",
+          //         "GdnameM" : "테스트용",
+          //         "MtcodeM" : "A",
+          //       }
+          //     ]
+          // }
 
+          debugger;
+          
           oModel.create("/BOM_HSet", oBomData, {
             success : function(oReturn){
               debugger;
+              oView.byId("idaddbomcan").fireEvent('press');
               MessageToast.show("데이터 생성 완료");
             },
 
             error : function(oError){
               debugger;
-              MessageToast.show(oError);
+              oView.byId("idaddbomcan").fireEvent('press');
               console.log(oError)
-
             }
         });
 
@@ -377,8 +380,6 @@ sap.ui.define(
               Quan = this.byId("iditemQuan").getValue();
 
 
-          
-
           if(idheadgdcode == ""){
             MessageToast.show("완제품 품목코드를 선택해 주세요");
           }
@@ -400,7 +401,6 @@ sap.ui.define(
             oDatahead.Gdcode = Gdcode;
             oDatahead.Gdname = Gdname;
             oDatahead.Mtcode = Mtcode;
-            debugger;
           
             // 테이블 타이틀 체크
             if(oDataitem.length > 0){
@@ -434,7 +434,6 @@ sap.ui.define(
             // 테이블 세트
             this.getView().getModel("addbom").setProperty("/BOM_ISet", oDataitem);
           }
-
 
         }
       

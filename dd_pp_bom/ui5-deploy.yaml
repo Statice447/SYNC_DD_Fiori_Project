@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://sap.github.io/ui5-tooling/schema/ui5.yaml.json
+
+specVersion: "3.1"
+metadata:
+  name: fiorippbom
+type: application
+builder:
+  resources:
+    excludes:
+      - /test/**
+      - /localService/**
+  customTasks:
+    - name: deploy-to-abap
+      afterTask: generateCachebusterInfo
+      configuration:
+        target:
+          url: http://saphana01.konyang.ac.kr:8080/
+          client: "400"
+        app:
+          name: ZBSP702_BOM
+          description: PP BOM 마스터
+          package: ZC702_DD_PRJ
+          transport: "KYHK900062"
+        exclude:
+          - /test/

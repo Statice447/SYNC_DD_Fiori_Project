@@ -149,7 +149,7 @@
             <Toolbar>
                 <ToolbarSpacer/>
                 <Button type="Success" text="확인" press="onCreate"/>
-                <Button type="Negative" text="취소" press="onClose"/>
+                <Button id="idaddbomcan" type="Negative" text="취소" press="onClose"/>
             </Toolbar>
 
         </content>

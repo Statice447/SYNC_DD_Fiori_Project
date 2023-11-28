@@ -67,8 +67,6 @@
                                 columnsM="1">
                                 <form:content>
                                     <m:Toolbar>
-                                        <m:Button id="idback" text="이전 화면" press="handleClose" width="8rem"/>
-
                                         <m:ToolbarSpacer/>
                                         <m:Button id="idflag" text="" type="Emphasized" width="8rem" press="onDelflag"/>
                                     </m:Toolbar>

@@ -94,12 +94,13 @@ sap.ui.define(
          oModel.update(path, obj, {
              success : function(oReturn){
               debugger;
-                 MessageToast.show("데이터 변경 완료");
+                 MessageToast.show(obj.Bomid + " 변경 완료");
                  idClose.fireEvent('press');
              },
              error : function(oError) {
               debugger;
-                MessageToast.show(obj.Bomid + "변경 완료");
+                MessageToast.show("데이터 변경 실패");
+                console.log(oError);
                 idClose.fireEvent('press');
                 // console.log(oError)
              }
@@ -140,15 +141,15 @@ sap.ui.define(
             layout: sNextLayout,
             product: this._product,
           });
-        },
-  
-        onGoDetailDetail: function() {
-          this.oView.getParent().getParent().setLayout("ThreeColumnsMidExpanded");
-          this.oRouter.navTo("DetailDetail", {
-            layout: "ThreeColumnsMidExpanded",
-            product: this._product,
-          });
         }
+  
+        // onGoDetailDetail: function() {
+        //   this.oView.getParent().getParent().setLayout("ThreeColumnsMidExpanded");
+        //   this.oRouter.navTo("DetailDetail", {
+        //     layout: "ThreeColumnsMidExpanded",
+        //     product: this._product,
+        //   });
+        // }
       });
     }
   );
