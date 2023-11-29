@@ -21,12 +21,14 @@ sap.ui.define([
             onInit: function () {
                 this.oRouter = this.getOwnerComponent().getRouter();
                 var oModel = new JSONModel();
-                oModel.loadData("../model/tree.json");
+                // oModel.loadData("../model/tree.json");
+                oModel.loadData(`${_rootpath}/model/tree.json`);
 
                 this.getView().setModel(oModel, 'tree');
                 var oData = new JSONModel({
                     Prdmanage : [],
-                    Chart : []
+                    Chart : [],
+                    Count : []
                 });
 
                 var oModelData = this.getView().setModel(oData, "main");
@@ -308,6 +310,7 @@ sap.ui.define([
 
             setVizframe: function(oData, index){
                 let aFilter = [];
+                let oView = this.getView();
                     
                 var oModelData = this.getView().getModel("main");
 
@@ -479,17 +482,26 @@ sap.ui.define([
 
                         // 실수 소수점 두 자리까지 허용
                         let percentage = (( deQuan / noQuan ) * 100).toFixed(2);
-                        // 숫자형은 문자형으로 변경
+                        // 숫자형은 문자형으로 변경 , 수량 길이에 따라 타일 타입 길이 설정
                         let quanLength = String(totalQuan).length;
 
-                        // view에 사용 될 데이터 set
-                        this.getView().byId("idMicro").setPercentage(Number(percentage));
-                        this.byId("idnc1").setTruncateValueTo(quanLength);
-                        this.byId("idnc1").setValue(totalQuan);
-                        this.getView().byId("idtabTotal").setCount(totalCnt);
-                        this.getView().byId("idtabProduction").setCount(productionCnt);
-                        this.getView().byId("idtabWait").setCount(waitCnt);
-                        this.getView().byId("idtabComplete").setCount(completeCnt);
+                        let oCount = { 
+
+                            // 아이콘 탭바 바인딩 용
+                            "total" : totalCnt, 
+                            "production" : productionCnt,
+                            "wait" : waitCnt,
+                            "complete" : completeCnt,
+
+                            // 제네릭 타일 바인딩 용
+                            "quanlength" : quanLength,
+                            "totalquan" : Number(totalQuan),
+                            "percentage" : Number(percentage)
+                        }
+
+                        // IconTabBar 및 GenericTile 데이터 모델에 입력
+                        oView.getModel("main").setProperty("/Count", oCount);
+                        
                     }.bind(this)
 
                 });

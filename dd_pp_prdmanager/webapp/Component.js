@@ -1,6 +1,7 @@
 /**
  * eslint-disable @sap/ui5-jsdocs/no-jsdoc
  */
+var _rootpath = jQuery.sap.getModulePath("ddppprdmanager");
 
 sap.ui.define([
         "sap/ui/core/UIComponent",

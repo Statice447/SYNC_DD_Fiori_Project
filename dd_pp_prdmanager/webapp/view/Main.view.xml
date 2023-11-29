@@ -26,7 +26,7 @@
                 <IconTabFilter
                     id="idtabTotal"
                     showAll="true"
-                    count=""
+                    count="{main>/Count/total}"
                     text="Products"
                     key="All"/>
                 <IconTabSeparator/>
@@ -34,21 +34,21 @@
                     id="idtabProduction"
                     icon="sap-icon://factory"
                     iconColor="Tile"
-                    count=""
+                    count="{main>/Count/production}"
                     text="생산 중"
                     key="Production"/>
                 <IconTabFilter
                     id="idtabWait"
                     icon="sap-icon://commission-check"
                     iconColor="Critical"
-                    count=""
+                    count="{main>/Count/wait}"
                     text="검수 대기"
                     key="WaitChecking"/>
                 <IconTabFilter
                     id="idtabComplete"
                     icon="sap-icon://complete"
                     iconColor="Positive"
-                    count=""
+                    count="{main>/Count/complete}"
                     text="생산 완료"
                     key="Complete"/>
 
@@ -202,7 +202,7 @@
                                                     class="sapUiSmallMarginBottom"
                                                     id="idMicro"
                                                     size="L"
-                                                    percentage="0"
+                                                    percentage="{main>/Count/percentage}"
                                                     valueColor="Error"
                                                     press="press"/>
                                             </content>
@@ -219,9 +219,9 @@
                                     <TileContent id="idTitle" footer="월 생산량">
                                         <NumericContent
                                             id="idnc1"
-                                            truncateValueTo=""
+                                            truncateValueTo="{main>/Count/quanlength}"
                                             scale="EA"
-                                            value=""
+                                            value="{main>/Count/totalquan}"
                                             icon="sap-icon://line-charts"
                                             withMargin="false"/>
 
