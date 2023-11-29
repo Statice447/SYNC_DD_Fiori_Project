@@ -70,7 +70,7 @@
                         <t:TreeTable
                             id="TreeTableBasic"
                             width="12rem"
-                            minAutoRowCount="12"
+                            minAutoRowCount="11"
                             visibleRowCountMode="Auto"
                             rows="{
                                 path:'tree>/catalog/year',
@@ -81,7 +81,8 @@
                             selectionBehavior="RowOnly"
                             enableSelectAll="false"
                             ariaLabelledBy="title">
-                            <t:extension></t:extension>
+                            <t:extension>
+                            </t:extension>
                             <t:columns>
                                 <t:Column >
                                     <Label text="연도"/>

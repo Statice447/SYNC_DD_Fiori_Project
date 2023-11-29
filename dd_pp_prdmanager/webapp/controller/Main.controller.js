@@ -43,18 +43,23 @@ sap.ui.define([
 
             onSelectChange(oEvent) {
                 debugger;
-                    
-                let index = oEvent.getParameters().rowIndex,
-                sPath = this.byId("TreeTableBasic").getContextByIndex(index).sPath,
-                oData = this.getView().getModel("tree").getProperty(sPath);
+                let index = oEvent.getParameters().rowIndex;
+
+                if(index == -1){
+                    this.onCollapseAll();
+                }
+                else{
+                    let sPath = this.byId("TreeTableBasic").getContextByIndex(index).sPath,
+                        oData = this.getView().getModel("tree").getProperty(sPath);
 
                 // 차트 즉시 업데이트를 위한 현재 선택한 데이터 경로 클로저 변수에 저장
-                goIndex = index;
-                goData = oData;
+                    goIndex = index;
+                    goData = oData;
                 
                 // 차트 생성 함수, 즉시 업데이트를 위한 클로저 변수 2개 사용
-                this.setVizframe(oData, index);
+                    this.setVizframe(oData, index);
 
+                }
             },
 
             // 포매터 함수들
@@ -519,6 +524,11 @@ sap.ui.define([
                     }.bind(this)
 
                 });
+            },
+
+            onCollapseAll: function() {
+                var oTreeTable = this.byId("TreeTableBasic");
+                oTreeTable.collapseAll();
             }
 
         
