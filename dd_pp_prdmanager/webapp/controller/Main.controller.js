@@ -136,6 +136,13 @@ sap.ui.define([
                         oData = this.getView().getModel("tree").getProperty(sPath);
 
                     // 다이얼로그 박스 버전 오픈
+                    if(oData.id == 'year'){
+                        this.byId("quanDialog").setTitle(oData.name + "년 정상&불량 수량");
+                    }
+
+                    if(oData.month){
+                        this.byId("quanDialog").setTitle(oData.year + "년 " + oData.month + "월 정상&불량 수량");
+                    }
                     this.getView().byId("quanDialog").open();
 
                     // 팝오버 버전
@@ -161,6 +168,7 @@ sap.ui.define([
 
                     //     oPopover.openBy(oSource);
                     // });
+                    
                 }
 
                 
@@ -226,6 +234,7 @@ sap.ui.define([
                                         obj.Chnam = "SNG-19";
                                         // date가 빈 값이면 이상한 에러 뜨면서 업데이트 불가
                                         obj.Chdat = today;
+                                        obj.Status = '2';
 
                                         oModel.update(path, obj, {
                                             success : function(oReturn){
