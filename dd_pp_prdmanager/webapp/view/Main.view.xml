@@ -120,7 +120,7 @@
                                         <Text text="{main>Prmnum}" wrapping="false"/>
                                     </t:template>
                                 </t:Column>
-                                <t:Column hAlign="Center" width="6%">
+                                <t:Column hAlign="Center" width="6%" filterProperty="Plname" >
                                     <Label text="공장명"/>
                                     <t:template>
                                         <Text text="{main>Plname}" wrapping="false"/>
@@ -129,10 +129,10 @@
                                 <t:Column hAlign="Center" width="8%" filterProperty="Gdcode">
                                     <Label text="품목코드"/>
                                     <t:template>
-                                        <Text text="{main>Gdcode}" wrapping="false"/>
+                                        <Text text="{main>Gdcode}"  wrapping="false"/>
                                     </t:template>
                                 </t:Column>
-                                <t:Column >
+                                <t:Column filterProperty="Gdname">
                                     <Label text="품목명" width="25%"/>
                                     <t:template>
                                         <Text text="{main>Gdname}" wrapping="false"/>
