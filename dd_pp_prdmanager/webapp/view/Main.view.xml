@@ -70,7 +70,7 @@
                         <t:TreeTable
                             id="TreeTableBasic"
                             width="12rem"
-                            minAutoRowCount="11"
+                            minAutoRowCount="12"
                             visibleRowCountMode="Auto"
                             rows="{
                                 path:'tree>/catalog/year',
