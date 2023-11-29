@@ -37,6 +37,8 @@ sap.ui.define(
          * Title text 세팅
          */
         _onPatternMatched: function (oEvent) {
+          
+          this.byId("BOMitemTable").removeSelections();
           let oParam = oEvent.getParameters().arguments,
               oFilter = new Filter('Bomid', 'EQ', oParam.BOMid);
 

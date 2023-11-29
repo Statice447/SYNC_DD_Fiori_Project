@@ -26,22 +26,22 @@ sap.ui.define(
               BOM_ISet : []
           });
 
-          var oAddbomhead = new JSONModel(
-            {
-              'Gdcode' : '',
-              'Gdname' : '',
-              'Mtcode' : ''
-            }
-          )
-          var oAddbomitem = new JSONModel({
-            Bomitem : []
-          });
+          // var oAddbomhead = new JSONModel(
+          //   {
+          //     'Gdcode' : '',
+          //     'Gdname' : '',
+          //     'Mtcode' : ''
+          //   }
+          // )
+          // var oAddbomitem = new JSONModel({
+          //   Bomitem : []
+          // });
 
           this.getView().setModel(oModel, "head");
           this.getView().setModel(oAddBom,"addbom");
 
-          this.getView().setModel(oAddbomitem,"addbomitem");
-          this.getView().setModel(oAddbomhead,"addbomhead");
+          // this.getView().setModel(oAddbomitem,"addbomitem");
+          // this.getView().setModel(oAddbomhead,"addbomhead");
           this.oRouter.getRoute("Main").attachPatternMatched(this._onPatternMatched, this);
         },
 
@@ -434,7 +434,6 @@ sap.ui.define(
             // 테이블 세트
             this.getView().getModel("addbom").setProperty("/BOM_ISet", oDataitem);
           }
-
         }
       
       });
