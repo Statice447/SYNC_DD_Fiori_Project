@@ -26,22 +26,9 @@ sap.ui.define(
               BOM_ISet : []
           });
 
-          // var oAddbomhead = new JSONModel(
-          //   {
-          //     'Gdcode' : '',
-          //     'Gdname' : '',
-          //     'Mtcode' : ''
-          //   }
-          // )
-          // var oAddbomitem = new JSONModel({
-          //   Bomitem : []
-          // });
-
           this.getView().setModel(oModel, "head");
           this.getView().setModel(oAddBom,"addbom");
 
-          // this.getView().setModel(oAddbomitem,"addbomitem");
-          // this.getView().setModel(oAddbomhead,"addbomhead");
           this.oRouter.getRoute("Main").attachPatternMatched(this._onPatternMatched, this);
         },
 
@@ -72,25 +59,10 @@ sap.ui.define(
         },
   
         onSearch: function () {
-          // let oData = this.getView().getModel("head").getData();
-          // let oinput = this.byId("BOMidID").getValue();
           let oGdname = this.byId("gdnameid").getValue();
           let oStatus = this.byId("statusid").getValue();
 
-          // var oModel = this.getView().getModel("main");
-
-          //       this.getView().getModel().read(`/BOM_HSet`, {
-          //           success : function(oReturn){
-          //               oModel.setProperty("/", oReturn);        
-          //           }
-          //       });
-  
-          //   debugger;
           let afilter = [];
-          // if (oinput) {
-          //     let oFilter =  new Filter('Bomid', 'Contains', oinput)
-          //     afilter.push(oFilter);
-          // };
 
           // 기본으로 가동 중인 것만 조회
           if (!oStatus) {
