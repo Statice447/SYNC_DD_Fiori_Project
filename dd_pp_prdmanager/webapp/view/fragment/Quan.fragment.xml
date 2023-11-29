@@ -1,0 +1,57 @@
+<core:FragmentDefinition
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:viz.data="sap.viz.ui5.data"
+    xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+    xmlns:viz="sap.viz.ui5.controls">
+    <Dialog id="quanDialog" title="정상,불량 수량 확인">
+        <content>
+            <VBox class="sapUiSmallMargin" id="chartBox">
+                <viz:VizFrame
+                    id="idChart2"
+                    uiConfig="{applicationSet:'fiori'}"
+                    vizProperties="{
+                                'title' : { 'visible' : true , text : '정상,불량 수량 확인'},
+                                'legendGroup':{layout:{position: 'right'}},
+                                'plotArea': {
+                                    drawingEffect: 'glossy',
+                                    dataLabel: { visible: true, type:'value'}
+                                }
+                            }"
+                    vizType='bar'>
+                    <viz:dataset>
+                        <viz.data:FlattenedDataset data="{main>/Chart}">
+                            <viz.data:dimensions>
+                                <viz.data:DimensionDefinition
+                                    id="idbargdname"
+                                    name="상품명"
+                                    value="{main>Gdname}"/>
+                            </viz.data:dimensions>
+                            <viz.data:measures>
+                                <viz.data:MeasureDefinition name="정상수량" value="{main>Noquan}"/>
+                                <viz.data:MeasureDefinition name="불량수량" value="{main>Dequan}"/>
+                            </viz.data:measures>
+                        </viz.data:FlattenedDataset>
+                    </viz:dataset>
+
+                    <viz:feeds>
+                        <viz.feeds:FeedItem uid="valueAxis" type="Measure" values="정상수량"/>
+                        <viz.feeds:FeedItem uid="valueAxis" type="Measure" values="불량수량"/>
+                        <viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="상품명"/>
+                    </viz:feeds>
+                    <viz:dependents>
+                        <viz:Popover id="idPop2Over"></viz:Popover>
+                    </viz:dependents>
+                </viz:VizFrame>
+
+            </VBox>
+            <Toolbar>
+                <ToolbarSpacer/>
+                <Button type="Emphasized" text="닫기" press="onClose"/>
+            </Toolbar>
+
+        </content>
+
+    </Dialog>
+</core:FragmentDefinition>

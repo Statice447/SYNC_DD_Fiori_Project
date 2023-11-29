@@ -135,28 +135,32 @@ sap.ui.define([
                         sPath = this.byId("TreeTableBasic").getContextByIndex(index).sPath,
                         oData = this.getView().getModel("tree").getProperty(sPath);
 
-                    if (!this._pPopover) {
-                        this._pPopover = Fragment.load({
-                            name: "ddppprdmanager.view.fragment.popover",
-                            controller: this
-                        }).then(function(oPopover) {
-                            oView.addDependent(oPopover);
+                    // 다이얼로그 박스 버전 오픈
+                    this.getView().byId("quanDialog").open();
 
-                            return oPopover;
-                        });
-                    }
-                    this._pPopover.then(function(oPopover) {
-                        // 연도, 월을 구분하여 타이틀 출력
-                        if(oData.id == 'year'){
-                            oPopover.setTitle(oData.name + "년 정상&불량 수량");
-                        }
+                    // 팝오버 버전
+                    // if (!this._pPopover) {
+                    //     this._pPopover = Fragment.load({
+                    //         name: "ddppprdmanager.view.fragment.Quan",
+                    //         controller: this
+                    //     }).then(function(oPopover) {
+                    //         oView.addDependent(oPopover);
 
-                        if(oData.month){
-                            oPopover.setTitle(oData.year + "년 " + oData.month + "월 정상&불량 수량");
-                        }
+                    //         return oPopover;
+                    //     });
+                    // }
+                    // this._pPopover.then(function(oPopover) {
+                    //     // 연도, 월을 구분하여 타이틀 출력
+                    //     if(oData.id == 'year'){
+                    //         oPopover.setTitle(oData.name + "년 정상&불량 수량");
+                    //     }
 
-                        oPopover.openBy(oSource);
-                    });
+                    //     if(oData.month){
+                    //         oPopover.setTitle(oData.year + "년 " + oData.month + "월 정상&불량 수량");
+                    //     }
+
+                    //     oPopover.openBy(oSource);
+                    // });
                 }
 
                 
@@ -164,7 +168,8 @@ sap.ui.define([
             },
 
             onClose: function(){
-                sap.ui.getCore().byId('idpopover').close();
+                // sap.ui.getCore().byId('idpopover').close();
+                this.getView().byId('quanDialog').close();
             },
 
             onStatus: function(oEvent){

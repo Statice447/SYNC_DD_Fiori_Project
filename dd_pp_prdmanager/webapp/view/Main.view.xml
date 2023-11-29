@@ -16,9 +16,10 @@
     xmlns:viz="sap.viz.ui5.controls"
     xmlns:fr="sap.ui.core.Fragment"
     xmlns:ux="sap.uxap">
-     <Page id="page" title="생산 현황 관리" class="sapUiResponsivePadding--header">
+    <Page id="page" title="생산 현황 관리" class="sapUiResponsivePadding--header">
         <!-- 뷰에서 프래그먼트 선언 -->
         <core:Fragment fragmentName="ddppprdmanager.view.fragment.Complete" type="XML"/>
+        <core:Fragment fragmentName="ddppprdmanager.view.fragment.Quan" type="XML"/>
 
         <!-- 아이콘 탭바 위치-->
         <IconTabBar id="idIconTabBar" select=".onFilterSelect">
@@ -259,7 +260,11 @@
                                             <viz.feeds:FeedItem uid="size" type="Measure" values="생산량"/>
                                             <viz.feeds:FeedItem uid="color" type="Dimension" values="품목명"/>
                                         </viz:feeds>
+                                        <viz:dependents>
+                                            <viz:Popover id="idPop1Over"></viz:Popover>
+                                        </viz:dependents>
                                     </viz:VizFrame>
+
                                 </l:Grid >
                             </l:HorizontalLayout>
                         </HBox>
