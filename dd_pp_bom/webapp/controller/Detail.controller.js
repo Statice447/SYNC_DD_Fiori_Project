@@ -37,29 +37,32 @@ sap.ui.define(
          * Title text 세팅
          */
         _onPatternMatched: function (oEvent) {
-          
           this.byId("BOMitemTable").removeSelections();
           let oParam = oEvent.getParameters().arguments,
-              oFilter = new Filter('Bomid', 'EQ', oParam.BOMid);
+              oFilter = new Filter('Bomid', 'EQ', oParam.Bomid);
 
-          this.byId("headerKey").setText(oParam.BOMid);
-          this._product = oParam.BOMid;
-  
-          this.byId("BOMitemid").setText(oParam.BOMid);
-          this.byId("GDNAMEid").setText(oParam.GDNAME);
+          this.byId("headerKey").setText(oParam.Bomid);
+          this._product = oParam.Bomid;
 
-          switch(oParam.DELFLAG){
-            case 'true' :
+          var headobj = this.getView().getModel().getObject(`/BOM_HSet('${this._product}')`);
+          debugger;
+
+          this.byId("BOMitemid").setText(headobj.Bomid);
+          this.byId("GDNAMEid").setText(headobj.Gdname);
+
+          debugger;
+          switch(headobj.Delflag){
+            case true :
               this.byId("idflag").setText("가동");
               break;
 
-            case 'false' :
+            case false :
               this.byId("idflag").setText("가동중지");
               break;
           }
           
           this.byId("BOMitemTable").getBinding("items").filter(oFilter);
-          this.byId("idflatdata").getBinding("data").filter(oFilter);
+          // this.byId("idflatdata").getBinding("data").filter(oFilter);
   
         },
 
@@ -124,11 +127,13 @@ sap.ui.define(
          * 풀스크린 모드 세팅
          */
         handleFullScreen: function () {
+          debugger;
+          this._product = this.byId("BOMitemid").getText();
           this.bFocusFullScreenButton = true;
           var sNextLayout = "MidColumnFullScreen"; //sap.f.LayoutType
           this.oRouter.navTo("Detail", {
             layout: sNextLayout,
-            product: this._product,
+            Bomid: this._product,
           });
         },
   
@@ -136,12 +141,14 @@ sap.ui.define(
          * 풀스크린 모드 종료
          */
         handleExitFullScreen: function () {
+          debugger;
+          this._product = this.byId("BOMitemid").getText();
           this.bFocusFullScreenButton = true;
           var sNextLayout = "TwoColumnsMidExpanded"; //sap.f.LayoutType
   
           this.oRouter.navTo("Detail", {
             layout: sNextLayout,
-            product: this._product,
+            Bomid: this._product,
           });
         }
   

@@ -107,17 +107,7 @@ sap.ui.define(
           
           this.oRouter.navTo("Detail", {
             layout: oNextUIState.layout,
-            BOMid: oData.Bomid,
-            GDNAME : oData.Gdname,
-            DELFLAG : oData.Delflag
-          });
-        },
-  
-        onGoNewPage: function () {
-          this.oView.getParent().getParent().setLayout("MidColumnFullScreen");
-          this.oRouter.navTo("NewPage", {
-            layout: "MidColumnFullScreen",
-            product: this._product
+            Bomid: oData.Bomid,
           });
         },
 

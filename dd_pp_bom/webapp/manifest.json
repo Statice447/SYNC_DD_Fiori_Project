@@ -104,7 +104,7 @@
         },
         {
           "name": "Detail",
-          "pattern": "detail/{layout}/:BOMid:/:GDNAME:/:DELFLAG:",
+          "pattern": "detail/{layout}/:Bomid:",
           "target": ["mainView", "detailView"]
         }
       ],
