@@ -42,15 +42,14 @@ sap.ui.define(
               oFilter = new Filter('Bomid', 'EQ', oParam.Bomid);
 
           this.byId("headerKey").setText(oParam.Bomid);
+          this.byId("idsnap").setText(oParam.Bomid);
           this._product = oParam.Bomid;
 
           var headobj = this.getView().getModel().getObject(`/BOM_HSet('${this._product}')`);
-          debugger;
 
           this.byId("BOMitemid").setText(headobj.Bomid);
           this.byId("GDNAMEid").setText(headobj.Gdname);
 
-          debugger;
           switch(headobj.Delflag){
             case true :
               this.byId("idflag").setText("가동");
@@ -107,7 +106,6 @@ sap.ui.define(
                 MessageToast.show("데이터 변경 실패");
                 console.log(oError);
                 idClose.fireEvent('press');
-                // console.log(oError)
              }
          });
       },
@@ -127,7 +125,6 @@ sap.ui.define(
          * 풀스크린 모드 세팅
          */
         handleFullScreen: function () {
-          debugger;
           this._product = this.byId("BOMitemid").getText();
           this.bFocusFullScreenButton = true;
           var sNextLayout = "MidColumnFullScreen"; //sap.f.LayoutType
@@ -141,7 +138,6 @@ sap.ui.define(
          * 풀스크린 모드 종료
          */
         handleExitFullScreen: function () {
-          debugger;
           this._product = this.byId("BOMitemid").getText();
           this.bFocusFullScreenButton = true;
           var sNextLayout = "TwoColumnsMidExpanded"; //sap.f.LayoutType

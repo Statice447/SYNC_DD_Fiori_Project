@@ -23,7 +23,17 @@
                 <expandedHeading>
                     <m:Title id="headerKey" text="" wrapping="true" class="sapUiSmallMarginEnd"/>
                 </expandedHeading>
-
+                <snappedHeading>
+                    <m:FlexBox wrap="Wrap" fitContainer="true" alignItems="Center">
+                        <m:FlexBox
+                            wrap="NoWrap"
+                            fitContainer="true"
+                            alignItems="Center"
+                            class="sapUiTinyMarginEnd">
+                            <m:Title id="idsnap" text="" wrapping="true" class="sapUiTinyMarginEnd"/>
+                        </m:FlexBox>
+                    </m:FlexBox>
+                </snappedHeading>
 
                 <navigationActions>
                     <m:OverflowToolbarButton
@@ -49,6 +59,7 @@
                 </navigationActions>
             </ObjectPageDynamicHeaderTitle>
         </headerTitle>
+        <headerContent />
 
         <sections>
             <ObjectPageSection title="완제품 정보">

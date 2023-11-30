@@ -8,7 +8,6 @@
     xmlns:core="sap.ui.core"
     xmlns:tnt="sap.tnt">
     <Page id="page" title="BOM 관리" class="sapUiResponsivePadding--header">
-        <core:Fragment fragmentName="fiorippbom.view.fragment.Create" type="XML"/>
         <VBox >
             <fb:FilterBar
                 id="filterbar"
@@ -122,6 +121,8 @@
                     </ColumnListItem>
                 </items>
             </Table>
+            
+        <core:Fragment fragmentName="fiorippbom.view.fragment.Create" type="XML"/>
         </VBox>
     </Page>
 </mvc:View>

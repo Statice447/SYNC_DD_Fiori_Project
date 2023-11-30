@@ -126,7 +126,7 @@
       "viewName": "fiorippbom.view.App",
       "type": "XML",
       "async": true,
-      "id": "App"
+      "id": "app"
     },
     "config": {
       "fullWidth": true
