@@ -78,6 +78,7 @@
                                 columnsM="1">
                                 <form:content>
                                     <m:Toolbar>
+                                        <m:Title text="완제품 정보"></m:Title>
                                         <m:ToolbarSpacer/>
                                         <m:Button id="idflag" text="" type="Emphasized" width="8rem" press="onDelflag"/>
                                     </m:Toolbar>
@@ -93,7 +94,7 @@
                 </subSections>
             </ObjectPageSection>
 
-            <ObjectPageSection title="BOM 아이템">
+            <ObjectPageSection title="BOM 리스트">
                 <subSections>
                     <ObjectPageSubSection>
                         <blocks>
@@ -112,7 +113,7 @@
                                 <m:headerToolbar>
                                     <m:OverflowToolbar>
                                         <m:content>
-                                            <m:Title text="BOM 아이템" level="H2"/>
+                                            <m:Title text="BOM 리스트" level="H2"/>
                                         </m:content>
                                     </m:OverflowToolbar>
                                 </m:headerToolbar>

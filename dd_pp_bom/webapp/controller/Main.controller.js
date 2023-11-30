@@ -82,7 +82,6 @@ sap.ui.define(
                 break;
             }
 
-            
           };
   
           if (oGdname) {
@@ -223,7 +222,6 @@ sap.ui.define(
               oDatahead = this.getView().getModel("addbom").getProperty("/"),
               oDataitem = this.getView().getModel("addbom").getProperty("/BOM_ISet"),
               Quan = this.byId("iditemQuan").getValue();
-
 
           if(idheadgdcode == ""){
             MessageToast.show("완제품 품목코드를 선택해 주세요");
