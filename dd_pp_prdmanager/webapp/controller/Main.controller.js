@@ -149,30 +149,6 @@ sap.ui.define([
                         this.byId("quanDialog").setTitle(oData.year + "년 " + oData.month + "월 정상&불량 수량");
                     }
                     this.getView().byId("quanDialog").open();
-
-                    // 팝오버 버전
-                    // if (!this._pPopover) {
-                    //     this._pPopover = Fragment.load({
-                    //         name: "ddppprdmanager.view.fragment.Quan",
-                    //         controller: this
-                    //     }).then(function(oPopover) {
-                    //         oView.addDependent(oPopover);
-
-                    //         return oPopover;
-                    //     });
-                    // }
-                    // this._pPopover.then(function(oPopover) {
-                    //     // 연도, 월을 구분하여 타이틀 출력
-                    //     if(oData.id == 'year'){
-                    //         oPopover.setTitle(oData.name + "년 정상&불량 수량");
-                    //     }
-
-                    //     if(oData.month){
-                    //         oPopover.setTitle(oData.year + "년 " + oData.month + "월 정상&불량 수량");
-                    //     }
-
-                    //     oPopover.openBy(oSource);
-                    // });
                     
                 }
 
@@ -438,66 +414,6 @@ sap.ui.define([
                        
                     }
                     oModelData.setProperty("/Chart", chartData);
-
-                        //////////////////////////////////////////////////////////////////////////////////
-
-                        // var totalCnt =  prmData.length;
-                        // var productionCnt = 0, waitCnt = 0, completeCnt = 0, totalQuan = 0;
-                        // var noQuan = 0, deQuan = 0;
-
-                        // if(totalCnt == 0){
-                        //     MessageToast.show("데이터가 존재하지 않습니다.");
-                        // }
-                        // else{
-                        //     for(var i = 0; i < totalCnt; i++){
-                        //         if(prmData[i].Status){
-                        //             switch(prmData[i].Status){
-                        //                 case "2":
-                        //                     waitCnt = waitCnt + 1
-                        //                     break;
-                        //                 // 최종 완료 데이터 카운트
-                        //                 case "3":
-                        //                     completeCnt = completeCnt + 1
-                        //                     totalQuan = totalQuan + Number(prmData[i].Quan)
-                        //                     noQuan = noQuan + Number(prmData[i].Noquan);
-                        //                     deQuan = deQuan + Number(prmData[i].Dequan);
-                        //                     // tempChart.push(prmData[i])
-                                            
-                        //                     if(tempChart.length !== 0){
-                        //                         for(var j = 0; j < tempChart.length; j++){
-
-                        //                             if(prmData[i].Gdcode == tempChart[j].Gdcode ){
-                        //                                 tempChart[j].Quan = Number(tempChart[j].Quan) + Number(prmData[i].Quan);
-                        //                                 tempChart[j].Noquan = Number(tempChart[j].Noquan) + Number(prmData[i].Noquan);
-                        //                                 tempChart[j].Dequan = Number(tempChart[j].Dequan) + Number(prmData[i].Dequan);
-                        //                                 break;
-                        //                             }
-                                                    
-                        //                             if(j == ((tempChart.length)-1) && ( prmData[i].Gdcode != tempChart[j].Gdcode) ){
-                        //                                 tempChart.push(prmData[i]);
-
-                        //                             }
-                        //                         }
-                        //                     }
-                        //                     else{
-                        //                         tempChart.push(prmData[i])
-                        //                         break;
-                        //                     }
-                        //             }
-                        //         }
-                        //         else{
-                        //             // 생산 중 데이터 카운트
-                        //             productionCnt = productionCnt + 1
-                        //         }
-                                
-                        //     };
-
-                        // }
-                        
-                        // // 객체로 count 변경 -> 실패
-                        // // tempCount.push({totalCnt, productionCnt, waitCnt, completeCnt})      
-                        // // oModelData.setProperty("/Count", tempCount);
-                        // oModelData.setProperty("/Chart", tempChart);
 
                         // 실수 소수점 두 자리까지 허용
                         let percentage = (( deQuan / noQuan ) * 100).toFixed(2);
