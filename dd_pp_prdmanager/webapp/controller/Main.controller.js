@@ -82,7 +82,7 @@ sap.ui.define([
                         }
                     }
                     else
-                        return "sap-icon://factory"; ;
+                        return "sap-icon://product"; ;
                 },
 
                 fnIconColor: function (value) {
