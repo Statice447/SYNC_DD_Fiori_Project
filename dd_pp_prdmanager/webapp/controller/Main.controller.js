@@ -215,7 +215,6 @@ sap.ui.define([
                                         obj.Chnam = "SNG-19";
                                         // date가 빈 값이면 이상한 에러 뜨면서 업데이트 불가
                                         obj.Chdat = today;
-                                        obj.Status = '2';
 
                                         oModel.update(path, obj, {
                                             success : function(oReturn){
