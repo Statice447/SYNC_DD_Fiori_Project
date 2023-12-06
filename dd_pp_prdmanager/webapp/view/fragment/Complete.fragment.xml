@@ -34,11 +34,11 @@
                             <Input id="idcomTotalUnit" editable="false" width="auto" value="EA"/>
 
                             <Label text="정상수량"/>
-                            <Input id="idcomNomalQuan" width="auto" value=""/>
+                            <Input id="idcomNomalQuan" type="Number" width="auto" value=""/>
                             <Input id="idcomNomalUnit" editable="false" width="auto" value="EA"/>
 
                             <Label text="불량수량"/>
-                            <Input id="idcomDisposalQuan" width="auto" value=""/>
+                            <Input id="idcomDisposalQuan" type="Number" width="auto" value=""/>
                             <Input id="idcomDisposalUnit" editable="false" width="auto" value="EA"/>
 
                         </f:content>
