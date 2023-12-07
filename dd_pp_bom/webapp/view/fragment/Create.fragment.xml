@@ -95,7 +95,7 @@
                                 <core:ListItem key="{Gdname}" text="{Gdname}" additionalText="{Gdcode}"/>
                             </ComboBox>
                             <Label text="수량"/>
-                            <Input id="iditemQuan" width="auto" value=""/>
+                            <Input id="iditemQuan" type="Number" width="auto" value=""/>
                             <Input id="iditemUnit" width="3rem" value="EA" editable="false" />
 
                         </f:content>
